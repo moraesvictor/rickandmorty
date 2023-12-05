@@ -4,7 +4,7 @@ import { Card } from "../Card/Card";
 import { Loading } from "../Loading/Loading";
 import { useState } from "react";
 import { Pagination } from "../Pagination/Pagination";
-import { info } from "console";
+import { Header } from "../Header/Header";
 
 interface RickAndMortyCharacter {
   created: string;
@@ -58,20 +58,23 @@ export const CardList = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="grid grid-cols-4 gap-2 row">
-      {characters.map((char) => (
-        <Card
-          key={char.id}
-          imageUrl={char.image}
-          status={char.status}
-          title={char.name}
+    <div>
+      <Header title="Characters" />
+      <div className="grid grid-cols-4 gap-2 row">
+        {characters.map((char) => (
+          <Card
+            key={char.id}
+            imageUrl={char.image}
+            status={char.status}
+            title={char.name}
+          />
+        ))}
+        <Pagination
+          currentPage={page}
+          onChangePage={(index) => setPage(index)}
+          totalPages={data?.info.pages || 0}
         />
-      ))}
-      <Pagination
-        currentPage={page}
-        onChangePage={(index) => setPage(index)}
-        totalPages={data?.info.pages || 0}
-      />
+      </div>
     </div>
   );
 };
