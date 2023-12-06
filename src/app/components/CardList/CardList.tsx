@@ -40,6 +40,7 @@ interface Data {
 }
 export const CardList = () => {
   const [page, setPage] = useState(1);
+  const [name, setName] = useState("");
   const { data, isLoading } = useQuery<Data>({
     queryKey: ["characters", page],
     queryFn: async () =>
@@ -59,9 +60,15 @@ export const CardList = () => {
 
   return (
     <div>
-      <Header title="Characters" />
+      <Header title="Characters" className="justify-between">
+        <input
+          placeholder="type a name"
+          className="border rounded-lg p-2 border-gray-700 active:border-2"
+          onChange={(event) => setName(event.target.value)}
+        />
+      </Header>
       <div className="grid grid-cols-4 gap-2 row">
-        {characters.map((char) => (
+        {characters?.map((char) => (
           <Card
             key={char.id}
             imageUrl={char.image}
