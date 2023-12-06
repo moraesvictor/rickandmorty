@@ -28,7 +28,7 @@ export const Pagination = ({
       <button
         onClick={() => onChangePage(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="border border-gray-600 min-w-[24px] mr-2"
+        className="border border-gray-600 min-w-[24px] mr-2 p-2 rounded-md"
       >
         Prev
       </button>
@@ -37,7 +37,7 @@ export const Pagination = ({
         <button
           onClick={() => onChangePage(page)}
           key={page}
-          className={clsx("border border-gray-600 min-w-[24px] mr-1 ", {
+          className={clsx("border border-gray-600 min-w-[24px] mr-1 p-2", {
             "bg-sky-500": currentPage === page,
           })}
         >
@@ -48,7 +48,7 @@ export const Pagination = ({
       <button
         onClick={() => onChangePage(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="border border-gray-600 min-w-[24px] ml-1"
+        className="border border-gray-600 min-w-[24px] ml-1 p-2 rounded-md"
       >
         Next
       </button>
