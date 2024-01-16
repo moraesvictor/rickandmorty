@@ -24,7 +24,7 @@ export const Pagination = ({
   );
 
   return (
-    <footer className="flex w-[100vw] justify-center items-center">
+    <footer className="flex w-[85vw] justify-center items-center">
       <button
         onClick={() => onChangePage(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
