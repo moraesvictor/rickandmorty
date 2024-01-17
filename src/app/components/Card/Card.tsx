@@ -20,7 +20,7 @@ export const Card = ({ imageUrl, title, status }: CardProps) => {
         className="rounded-t-md"
         src={imageUrl || ""}
         alt="card image"
-        width="300"
+        width="357"
         height="100"
       />
       <div className="bg-white px-2 pb-2 flex flex-col rounded-b-md">
