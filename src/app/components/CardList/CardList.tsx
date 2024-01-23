@@ -2,7 +2,7 @@
 import { useQuery } from "react-query";
 import { Card } from "../Card/Card";
 import { Loading } from "../Loading/Loading";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { Pagination } from "../Pagination/Pagination";
 import { Header } from "../Header/Header";
 import { useDebouncedCallback } from "use-debounce";
