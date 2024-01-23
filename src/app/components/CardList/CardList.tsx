@@ -38,6 +38,7 @@ interface Data {
   info: Info;
   results: RickAndMortyCharacter[];
 }
+
 export const CardList = () => {
   const [page, setPage] = useState(1);
   const [name, setName] = useState("");
@@ -50,7 +51,7 @@ export const CardList = () => {
         .then(async (res) => await res.json())
         .catch((err) => console.log(err)),
     refetchOnWindowFocus: false,
-    staleTime: 60 * 5 * 1000,
+    staleTime: Infinity,
   });
 
   console.log(data);
@@ -70,6 +71,7 @@ export const CardList = () => {
       <div className="grid grid-cols-4 gap-2 row">
         {characters?.map((char) => (
           <Card
+            name={char.name}
             key={char.id}
             imageUrl={char.image}
             status={char.status}
