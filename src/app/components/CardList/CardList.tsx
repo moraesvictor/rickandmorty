@@ -2,7 +2,7 @@
 import { useQuery } from "react-query";
 import { Card } from "../Card/Card";
 import { Loading } from "../Loading/Loading";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Pagination } from "../Pagination/Pagination";
 import { Header } from "../Header/Header";
 
@@ -54,31 +54,38 @@ export const CardList = () => {
     staleTime: Infinity,
   });
 
-  console.log(data);
   const characters: RickAndMortyCharacter[] = data?.results || [];
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <><Loading />
+    <Pagination
+      className="mt-5"
+      currentPage={page}
+      onChangePage={(index) => setPage(index)}
+      totalPages={100}
+    /></>;
 
   return (
     <div>
       <Header title="Characters" className="justify-between">
         <input
-          placeholder="type a name"
-          className="border rounded-lg p-2 border-gray-700 active:border-2"
+          placeholder="Type a name..."
+          className="border rounded-lg p-3 border-gray-700 active:border-2 text-gray-800"
           onChange={(event) => setName(event.target.value)}
         />
       </Header>
       <div className="grid grid-cols-4 gap-2 row">
         {characters?.map((char) => (
-          <Card
-            name={char.name}
-            key={char.id}
-            imageUrl={char.image}
-            status={char.status}
-            title={char.name}
-          />
+          <Suspense key={char.id}>
+            <Card
+              name={char.name}
+              imageUrl={char.image}
+              status={char.status}
+            />
+          </Suspense>
+
         ))}
         <Pagination
+          className="mt-5"
           currentPage={page}
           onChangePage={(index) => setPage(index)}
           totalPages={data?.info.pages || 0}

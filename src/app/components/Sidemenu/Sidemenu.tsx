@@ -3,7 +3,7 @@ import NavLinks from "./components/NavLink";
 
 export const Sidemenu = () => {
   return (
-    <aside className="border border-gray-700 w-screen h-auto absolute bg-gray-700 p-3">
+    <aside className="border w-screen h-auto absolute bg-[#bfde42] py-3 px-20">
       <NavLinks />
     </aside>
   );

@@ -1,19 +1,26 @@
 import Image from "next/image";
+import alive from '@/assets/alive_icon.svg'
+import dead from '@/assets/dead_icon.svg'
+import unknown from '@/assets/unknown_icon.svg'
 
 type CardProps = {
   imageUrl: string;
-  title: string;
   status: string;
   name: string;
 };
 
-export const Card = ({ imageUrl, title, status, name }: CardProps) => {
+export const Card = ({ imageUrl, status, name }: CardProps) => {
+
+  function capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   const renderStatus = () => {
     if (status === "Alive")
-      return <div className="w-4 h-4 bg-green-500 rounded-[50%]" />;
+      return <Image src={alive} width={20} height={20} alt="alive-icon" />;
     if (status === "Dead")
-      return <div className="w-4 h-4 bg-black rounded-[50%]" />;
-    return <div className="w-4 h-4 bg-gray-500 rounded-[50%]" />;
+      return <Image src={dead} width={20} height={20} alt="dead-icon" />;
+    return <Image src={unknown} width={20} height={20} alt="unknown-icon" />;
   };
   return (
     <div className="flex flex-col shadow-md border-stone-900 rounded-md">
@@ -24,14 +31,15 @@ export const Card = ({ imageUrl, title, status, name }: CardProps) => {
         width="357"
         height="100"
       />
-      <div className="bg-white px-2 pb-2 flex flex-col rounded-b-md">
-        <h3 className="font-bold text-sm">{title}</h3>
+      <div className="bg-white px-2 py-3 pb-2 flex flex-col rounded-b-md">
+
         <div className="flex items-center justify-between">
+          <span className="text-gray-600 text-sm ml-2 poppins font-bold">{name}</span>
+
           <div className="flex items-center">
             {renderStatus()}
-            <span className="text-gray-600 text-sm ml-2 poppins">{status}</span>
+            <span className="text-gray-600 text-sm ml-2 poppins">{capitalizeFirstLetter(status)}</span>
           </div>
-          <span className="text-gray-600 text-sm ml-2 poppins">{name}</span>
         </div>
       </div>
     </div>

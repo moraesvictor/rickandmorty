@@ -1,9 +1,10 @@
+import Image from "next/image";
+import banner from '../../../../public/rick_banner.jpg'
+
 export const MainHeader = () => {
   return (
-    <header>
-      <h1 className="text-5xl font-extrabold text-gray-800 flex justify-center items-center h-[30vh] bg-white">
-        RICKY AND MORTY DATA
-      </h1>
+    <header className="mt-[70px]">
+      <Image alt="banner-ricky-morty" src={banner} />
     </header>
   );
 };

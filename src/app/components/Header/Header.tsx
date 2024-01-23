@@ -11,7 +11,7 @@ type HeaderProps = {
 
 export const Header = ({ title, className, children }: HeaderProps) => {
   return (
-    <header className={clsx("flex py-3 items-center gap-2", className)}>
+    <header className={clsx("flex py-4 items-center gap-2", className)}>
       <div className="flex items-center">
         <Image src={Morty} alt="iconMorty" width="40" height="40" />
         <h2 className="font-bold text-3xl ml-2">{title}</h2>
