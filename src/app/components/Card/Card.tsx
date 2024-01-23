@@ -4,9 +4,10 @@ type CardProps = {
   imageUrl: string;
   title: string;
   status: string;
+  name: string;
 };
 
-export const Card = ({ imageUrl, title, status }: CardProps) => {
+export const Card = ({ imageUrl, title, status, name }: CardProps) => {
   const renderStatus = () => {
     if (status === "Alive")
       return <div className="w-4 h-4 bg-green-500 rounded-[50%]" />;
@@ -25,9 +26,12 @@ export const Card = ({ imageUrl, title, status }: CardProps) => {
       />
       <div className="bg-white px-2 pb-2 flex flex-col rounded-b-md">
         <h3 className="font-bold text-sm">{title}</h3>
-        <div className="flex flex-row items-center">
-          {renderStatus()}
-          <span className="text-gray-600 text-sm ml-2">{status}</span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            {renderStatus()}
+            <span className="text-gray-600 text-sm ml-2 poppins">{status}</span>
+          </div>
+          <span className="text-gray-600 text-sm ml-2 poppins">{name}</span>
         </div>
       </div>
     </div>

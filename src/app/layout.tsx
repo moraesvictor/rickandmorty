@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Sidemenu } from "./components/Sidemenu/Sidemenu";
@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { MainHeader } from "./components/MainHeader/MainHeader";
 
 const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ subsets: ["latin"], weight: '400' })
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,10 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={clsx(inter.className, "overflow-hidden")}>
+      <body className={clsx(inter.className, poppins.className, "overflow-hidden")}>
         <Providers>
-          <Sidemenu />
-          <div className="h-screen overflow-y-scroll overflow-x-hidden">
+          <div className="w-full flex-none md:w-64">
+            <Sidemenu />
+          </div>
+          <div className="h-screen overflow-y-scroll overflow-x-hidden flex-grow">
             <MainHeader />
             {children}
           </div>
