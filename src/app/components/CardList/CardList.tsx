@@ -75,10 +75,9 @@ export const CardList = () => {
       </Header>
       <div className="grid grid-cols-4 gap-2 row">
         {characters?.map((char) => (
-          <Suspense>
+          <Suspense key={char.id}>
             <Card
               name={char.name}
-              key={char.id}
               imageUrl={char.image}
               status={char.status}
             />
