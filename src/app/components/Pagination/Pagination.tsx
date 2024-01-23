@@ -1,14 +1,20 @@
 import clsx from "clsx";
+import arrow from "../../../../public/arrow.svg"
+import doubleArrow from "../../../../public/double_arrow.svg"
+
+import Image from "next/image";
 type PaginationProps = {
   currentPage: number;
   totalPages: number;
   onChangePage: (page: number) => void;
+  className?: string;
 };
 
 export const Pagination = ({
   totalPages,
   onChangePage,
   currentPage,
+  className
 }: PaginationProps) => {
   const adjacentPages = () => {
     if (currentPage === 1) return 4;
@@ -24,21 +30,24 @@ export const Pagination = ({
   );
 
   return (
-    <footer className="flex w-[85vw] justify-center items-center">
+    <footer className={clsx("flex w-[85vw] justify-center items-center", className)}>
+      <button onClick={() => onChangePage(1)} className="mr-2">
+        <Image className="rotate-180" alt='double-arrow-right' width={22} src={doubleArrow} />
+      </button>
       <button
         onClick={() => onChangePage(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="border border-gray-600 min-w-[24px] mr-2 p-2 rounded-md"
+        className="min-w-[24px] mr-1 p-2 rounded-md"
       >
-        Prev
+        <Image className="rotate-180" src={arrow} alt="arrow-left" width={22} />
       </button>
 
       {pages.map((page) => (
         <button
           onClick={() => onChangePage(page)}
           key={page}
-          className={clsx("border border-gray-600 min-w-[24px] mr-1 p-2", {
-            "bg-sky-500": currentPage === page,
+          className={clsx("border-2 border-[#42b4ca] mr-1 p-2 rounded-[50%] h-9 w-9 flex items-center justify-center", {
+            "bg-[#bfde42] text-gray-800 border-none": currentPage === page,
           })}
         >
           {page}
@@ -48,9 +57,12 @@ export const Pagination = ({
       <button
         onClick={() => onChangePage(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="border border-gray-600 min-w-[24px] ml-1 p-2 rounded-md"
+        className="min-w-[24px] ml-2"
       >
-        Next
+        <Image src={arrow} alt="arrow-right" width={22} />
+      </button>
+      <button onClick={() => onChangePage(totalPages)} className="ml-3">
+        <Image alt='double-arrow-right' width={22} src={doubleArrow} />
       </button>
     </footer>
   );
