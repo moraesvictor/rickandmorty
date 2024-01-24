@@ -5,6 +5,7 @@ import { Loading } from "../Loading/Loading";
 import { Suspense, useState } from "react";
 import { Pagination } from "../Pagination/Pagination";
 import { Header } from "../Header/Header";
+import { useDebouncedCallback } from "use-debounce";
 
 interface RickAndMortyCharacter {
   created: string;
@@ -43,9 +44,9 @@ export const CardList = () => {
   const [page, setPage] = useState(1);
   const [name, setName] = useState("");
   const { data, isLoading } = useQuery<Data>({
-    queryKey: ["characters", page],
+    queryKey: ["characters", page, name],
     queryFn: async () =>
-      fetch(`https://rickandmortyapi.com/api/character?page=${page}`, {
+      fetch(`https://rickandmortyapi.com/api/character?page=${page}&name=${name}`, {
         cache: "no-cache",
       })
         .then(async (res) => await res.json())
@@ -54,15 +55,11 @@ export const CardList = () => {
     staleTime: Infinity,
   });
 
-  const characters: RickAndMortyCharacter[] = data?.results || [];
+  const handleSearch = useDebouncedCallback((searchTerm) => {
+    setName(searchTerm)
+  }, 300)
 
-  if (isLoading) return <><Loading />
-    <Pagination
-      className="mt-5"
-      currentPage={page}
-      onChangePage={(index) => setPage(index)}
-      totalPages={100}
-    /></>;
+  const characters = data?.results || []
 
   return (
     <div>
@@ -70,27 +67,29 @@ export const CardList = () => {
         <input
           placeholder="Type a name..."
           className="border rounded-lg p-3 border-gray-700 active:border-2 text-gray-800"
-          onChange={(event) => setName(event.target.value)}
+          onChange={(event) => handleSearch(event.target.value)}
         />
       </Header>
-      <div className="grid grid-cols-4 gap-2 row">
-        {characters?.map((char) => (
-          <Suspense key={char.id}>
-            <Card
-              name={char.name}
-              imageUrl={char.image}
-              status={char.status}
-            />
-          </Suspense>
+      {isLoading ? <Loading /> :
+        <div className="grid grid-cols-4 gap-2 row w-full">
+          {
+            characters?.map((char) => (
+              <Suspense key={char.id}>
+                <Card
+                  name={char.name}
+                  imageUrl={char.image}
+                  status={char.status}
+                />
+              </Suspense>
 
-        ))}
-        <Pagination
-          className="mt-5"
-          currentPage={page}
-          onChangePage={(index) => setPage(index)}
-          totalPages={data?.info.pages || 0}
-        />
-      </div>
+            ))}
+        </div>}
+      <Pagination
+        className="mt-5"
+        currentPage={page}
+        onChangePage={(index) => setPage(index)}
+        totalPages={data?.info?.pages || 45}
+      />
     </div>
   );
 };

@@ -24,8 +24,8 @@ export const Loading: React.FC = () => {
         <Image
           src={img()}
           alt="Rick and Morty Loading"
-          width="100"
-          height="100"
+          width="300"
+          height="300"
         />
       </div>
       <div className="ml-4 text-xl text-gray-800">Loading...</div>
