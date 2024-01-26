@@ -6,6 +6,7 @@ import { Suspense, useState } from "react";
 import { Pagination } from "../Pagination/Pagination";
 import { Header } from "../Header/Header";
 import { useDebouncedCallback } from "use-debounce";
+import { usePathname, useRouter } from "next/navigation";
 
 interface RickAndMortyCharacter {
   created: string;
@@ -43,6 +44,7 @@ interface Data {
 export const CardList = () => {
   const [page, setPage] = useState(1);
   const [name, setName] = useState("");
+  const router = useRouter()
   const { data, isLoading } = useQuery<Data>({
     queryKey: ["characters", page, name],
     queryFn: async () =>
@@ -54,7 +56,6 @@ export const CardList = () => {
     refetchOnWindowFocus: false,
     staleTime: Infinity,
   });
-
   const handleSearch = useDebouncedCallback((searchTerm) => {
     setName(searchTerm)
   }, 300)
@@ -76,6 +77,7 @@ export const CardList = () => {
             characters?.map((char) => (
               <Suspense key={char.id}>
                 <Card
+                  onClick={() => router.push(`/character/${char.id}`)}
                   name={char.name}
                   imageUrl={char.image}
                   status={char.status}
