@@ -26,3 +26,30 @@ export const fetchCharacter = async (id: string) => {
 
     return character;
 }
+
+interface Location {
+    id: number;
+    name: string;
+    type: string;
+    dimension: string;
+    residents: string[]; // List of URLs
+    url: string; // URL to the location's own endpoint
+    created: string; // Time at which the location was created in the database
+};
+
+
+export const fetchLocationsByType = async (type: string) => {
+    const location: Promise<Location> = fetch(`https://rickandmortyapi.com/api/location/?type=${type}`).
+        then(async res => await res.json()).
+        catch(err => console.log(err))
+
+    return location;
+}
+
+export const fetchLocations = async (type: string) => {
+    const location: Promise<Location> = fetch(`https://rickandmortyapi.com/api/location/?type=${type}`).
+        then(async res => await res.json()).
+        catch(err => console.log(err))
+
+    return location;
+}
