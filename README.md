@@ -1,6 +1,6 @@
 # Rick and Morty Explorer
 
-![Rick and Morty Explorer](url_to_your_project_banner_image)
+![Rick and Morty Explorer](/src/assets/rick_morty_cover.png)
 
 ## Overview
 
