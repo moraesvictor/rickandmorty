@@ -29,7 +29,11 @@ export const fetchCharacter = async (id: string) => {
 
 interface Location {
     info: {
+        count: number;
+        next: string;
+        pages: number;
     }
+
     results: {
         id: number;
         name: string;

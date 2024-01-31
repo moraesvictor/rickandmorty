@@ -7,21 +7,27 @@ import { LocationRow } from "./components/LocationRow";
 import xablau from '@/assets/dimension-icon.svg'
 import created from '@/assets/created-icon.svg'
 import residentsIcon from '@/assets/residents-icon.svg'
+import { Pagination } from "@/app/components/Pagination/Pagination";
+import Loading from "@/app/components/CardList/loading";
 
 
 
 export default function Planets() {
     const [page, setPage] = useState(1)
 
-    const { data } = useQuery({ queryFn: async () => await fetchLocationsByType({ page, type: 'planet' }), queryKey: ['planet-locations', page] })
+    const { data, isLoading } = useQuery({ queryFn: async () => await fetchLocationsByType({ page, type: 'planet' }), queryKey: ['planet-locations', page] })
 
     const locations = data?.results || [];
 
+    console.log(data?.info)
+
+    if (isLoading) return <Loading />
+
     return (
         <div>
-            {locations.map((location) => {
+            {locations.map((location, index) => {
                 return (
-                    <div className="flex flex-col justify-center px-20">
+                    <div key={index} className="flex flex-col justify-center px-20">
                         <LocationRow
                             infos={
                                 [
@@ -39,6 +45,7 @@ export default function Planets() {
 
                 );
             })}
+            <Pagination className="w-[100vw] p-10" currentPage={page} onChangePage={(index) => setPage(index)} totalPages={data?.info.pages || 45} />
         </div>
     );
 }
