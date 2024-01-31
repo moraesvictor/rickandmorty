@@ -1,12 +1,12 @@
 import { fetchCharacter } from "@/app/lib/actions"
 import Image from "next/image"
-import { CharacterInfo } from "../components/CharacterInfo"
 import species from '@/assets/species-icon.svg'
 import subspecies from '@/assets/subspecies-icon.svg'
 import gender from '@/assets/gender-icon.svg'
 import origin from '@/assets/origin-icon.svg'
 import location from '@/assets/localization-icon.svg'
 import { StatusTag } from "../components/StatusTag"
+import { InfoTag } from "@/app/components/infoTag/InfoTag"
 
 
 export default async function Character({ params }: { params: { id: string } }) {
@@ -21,11 +21,11 @@ export default async function Character({ params }: { params: { id: string } }) 
                     <h3 className="font-bold text-[50px]/[30px] mr-5">{character.name}</h3>
                     <StatusTag status={character.status} />
                 </div>
-                <CharacterInfo icon={species} className="col-span-4" title="Species" description={character.species} />
-                <CharacterInfo icon={subspecies} className="col-span-4" title="Type" description={character.type || "-"} />
-                <CharacterInfo icon={gender} className="col-span-4" title="Gender" description={character.gender} />
-                <CharacterInfo icon={origin} className="col-span-4" title="Origin" description={(character.origin.name || "-")} />
-                <CharacterInfo icon={location} className="col-span-6" title="Location" description={character.location.name} />
+                <InfoTag icon={species} className="col-span-4" title="Species" description={character.species} />
+                <InfoTag icon={subspecies} className="col-span-4" title="Type" description={character.type || "-"} />
+                <InfoTag icon={gender} className="col-span-4" title="Gender" description={character.gender} />
+                <InfoTag icon={origin} className="col-span-4" title="Origin" description={(character.origin.name || "-")} />
+                <InfoTag icon={location} className="col-span-6" title="Location" description={character.location.name} />
             </div>
         </div>
     )
