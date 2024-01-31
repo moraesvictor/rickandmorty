@@ -11,7 +11,6 @@ const links = [
         name: 'Locations',
         href: '/locations',
     },
-    { name: 'Teste', href: '/teste' },
 ];
 
 export default function NavLinks() {

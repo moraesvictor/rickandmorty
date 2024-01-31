@@ -1,8 +1,9 @@
 import clsx from "clsx"
 import { StaticImport } from "next/dist/shared/lib/get-img-props"
 import Image from "next/image"
+import { ReactNode } from "react"
 
-export const CharacterInfo = ({ title, description, className, icon }: { title: string, description: string, className?: string, icon: string | StaticImport }) => {
+export const InfoTag = ({ title, description, className, icon }: { title: string, description: ReactNode, className?: string, icon: string | StaticImport }) => {
     return (
         <div className={clsx("flex items-center w-full", className)}>
             <Image className="mr-4" src={icon} alt="character-icon" width={36} height={36} />
