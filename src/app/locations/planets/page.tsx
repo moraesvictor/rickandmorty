@@ -9,7 +9,7 @@ import created from '@/assets/created-icon.svg'
 import residentsIcon from '@/assets/residents-icon.svg'
 import { Pagination } from "@/app/components/Pagination/Pagination";
 import Loading from "@/app/components/CardList/loading";
-
+import { Metadata } from "next";
 
 
 export default function Planets() {

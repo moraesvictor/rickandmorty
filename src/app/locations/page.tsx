@@ -2,7 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import planets from '@/assets/planets-filter.svg'
 import others from '@/assets/others-filter.svg'
+import { Metadata } from "next";
 
+
+export const metadata: Metadata = {
+    title: 'Locations | Ricky and Morty',
+  };
 
 export default function Locations() {
     return (

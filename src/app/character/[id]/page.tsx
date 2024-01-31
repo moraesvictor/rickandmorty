@@ -7,7 +7,12 @@ import origin from '@/assets/origin-icon.svg'
 import location from '@/assets/localization-icon.svg'
 import { StatusTag } from "../components/StatusTag"
 import { InfoTag } from "@/app/components/infoTag/InfoTag"
+import { Metadata } from "next"
 
+
+export const metadata: Metadata = {
+    title: 'Character details | Ricky and Morty',
+  };
 
 export default async function Character({ params }: { params: { id: string } }) {
 
